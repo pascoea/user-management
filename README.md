@@ -1,3 +1,5 @@
+This is NOT the main webvimark user management model.  This fork has been extended for my personal use.  (I'm not saying you can't use it, just warning you that it's been customized)
+
 User management module for Yii 2
 =====
 
