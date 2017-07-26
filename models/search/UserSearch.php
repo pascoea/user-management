@@ -35,6 +35,9 @@ class UserSearch extends User
 		if ( !Yii::$app->user->isSuperadmin )
 		{
 			$query->where(['superadmin'=>0]);
+			
+			//Adam Pascoe - Limiting which companies this user can see.
+			$query->andWhere(['=', 'company_id', Yii::$app->user->identity->company_id]);
 		}
 
 		$dataProvider = new ActiveDataProvider([

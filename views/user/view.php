@@ -52,6 +52,22 @@ $this->params['breadcrumbs'][] = $this->title;
 					],
 					'username',
 					[
+						'attribute'=>'company_id',
+						'value'=>$model->company0?$model->company0->company_name:null,
+						'format'=>'raw',
+						'visible'=>User::hasPermission('viewUserCompany'),
+					],
+					[
+						'attribute'=>'customer_name',
+						'value'=>$model->customer0?$model->customer0->customer_name:null,
+						'format'=>'raw',
+					],
+					[
+						'attribute'=>'worker_id',
+						'value'=>$model->worker0?($model->worker0->last_name.", ".$model->worker0->first_name):null,
+						'format'=>'raw',
+					],
+					[
 						'attribute'=>'email',
 						'value'=>$model->email,
 						'format'=>'email',

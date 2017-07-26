@@ -85,6 +85,24 @@ $this->params['breadcrumbs'][] = $this->title;
 							},
 						'format'=>'raw',
 					],
+					//Adam Pascoe - Added Company
+					[
+					'attribute'=>'company_id',
+					'format'=>'raw',
+					'value'=>'company0.company_name',
+					'visible'=>User::hasPermission('viewUserCompany'),
+					],
+					[
+					'attribute'=>'worker_id',
+					'format'=>'raw',
+					'value'=>'worker0.last_name',
+					],
+					[
+					'attribute'=>'customer_id',
+					'format'=>'raw',
+					'value'=>'customer0.customer_name',
+					],
+					//end company
 					[
 						'attribute'=>'email',
 						'format'=>'raw',

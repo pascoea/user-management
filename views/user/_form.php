@@ -5,6 +5,10 @@ use webvimark\modules\UserManagement\UserManagementModule;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use webvimark\extensions\BootstrapSwitch\BootstrapSwitch;
+use app\models\Company;
+use app\models\Worker;
+use app\models\Customer;
+//use yii\helpers\ArrayHelper;
 
 /**
  * @var yii\web\View $this
@@ -41,6 +45,17 @@ use webvimark\extensions\BootstrapSwitch\BootstrapSwitch;
 			->hint(UserManagementModule::t('back','For example: 123.34.56.78, 168.111.192.12')) ?>
 
 	<?php endif; ?>
+	
+	<?php if ( User::hasPermission('changeUserCompany') ): ?>
+
+		<?= $form->field($model, 'company_id')->dropDownList(Company::getDropDown()); ?>
+
+	<?php endif; ?>
+
+	<?= $form->field($model, 'worker_id')->dropDownList(Worker::getDropDown()); ?>
+
+	<?= $form->field($model, 'customer_id')->dropDownList(Customer::getDropDown()); ?>
+
 
 	<?php if ( User::hasPermission('editUserEmail') ): ?>
 

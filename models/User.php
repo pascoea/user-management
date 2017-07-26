@@ -11,6 +11,13 @@ use webvimark\modules\UserManagement\models\rbacDB\Route;
 use webvimark\modules\UserManagement\UserManagementModule;
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use app\models\Company;
+use app\models\Worker;
+use app\models\Customer;
+use app\components\ActiveRecord;
+
+use yii\helpers\VarDumper;
+use app\components\ActiveQuery;
 
 /**
  * This is the model class for table "user".
@@ -28,6 +35,9 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $superadmin
  * @property integer $created_at
  * @property integer $updated_at
+ * @property integer $company_id
+ * @property integer $worker_id
+ * @property integer $customer_id
  */
 class User extends UserIdentity
 {
@@ -268,6 +278,10 @@ class User extends UserIdentity
 
 			['repeat_password', 'required', 'on'=>['newUser', 'changePassword']],
 			['repeat_password', 'compare', 'compareAttribute'=>'password'],
+			[['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::className(), 'targetAttribute' => ['company_id' => 'company_id']],
+			[['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'customer_id']],
+			[['worker_id'], 'exist', 'skipOnError' => true, 'targetClass' => Worker::className(), 'targetAttribute' => ['worker_id' => 'worker_id']],
+				
 		];
 	}
 
@@ -329,6 +343,9 @@ class User extends UserIdentity
 			'repeat_password'    => UserManagementModule::t('back', 'Repeat password'),
 			'email_confirmed'    => UserManagementModule::t('back', 'E-mail confirmed'),
 			'email'              => UserManagementModule::t('back', 'E-mail'),
+			'company_id'=>'Company',
+			'customer_id'=>'Customer',
+			'worker_id'=>'Worker'
 		];
 	}
 
@@ -417,4 +434,42 @@ class User extends UserIdentity
 
 		return parent::beforeDelete();
 	}
+	/*
+	 *  trying to move this outside of the vendor    
+	public function getCompany0()
+    {
+        return $this->hasOne(Company::className(), ['company_id' => 'company_id']);
+    }
+    
+    public function getWorker0()
+    {
+    	return $this->hasOne(Worker::className(), ['worker_id' => 'worker_id']);
+    }
+    
+   public function getWorkerName()
+   {
+   		$return=$this->hasOne(Worker::className(),['worker_id' => 'worker_id'])->select(['concat(last_name,\', \',first_name) as name'])->asArray()->one();
+   		return $return['name'];
+   }
+    
+    public function getCustomer0()
+    {
+    	return $this->hasOne(Customer::className(), ['customer_id' => 'customer_id']);
+    }
+	 */
+	//Adam Pascoe - Get Company Name
+	/**
+	 * Get associated company information
+	 *
+	 * @param int    $userId
+	 * @param string $roleName
+	 *
+	 * @return ActiveRecord
+	 */
+
+    
+    public static function find()
+    {
+    	return new ActiveQuery(get_called_class());
+    }
 }

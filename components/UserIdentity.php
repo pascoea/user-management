@@ -3,7 +3,10 @@ namespace webvimark\modules\UserManagement\components;
 
 use webvimark\modules\UserManagement\models\User;
 use yii\base\Security;
-use yii\db\ActiveRecord;
+//Adam Pascoe updated to use base active record
+//use yii\db\ActiveRecord;
+use \app\components\ActiveRecord;
+//end mod
 use yii\web\IdentityInterface;
 use Yii;
 
@@ -20,6 +23,7 @@ use Yii;
  * @property integer $created_at
  * @property integer $updated_at
  */
+
 abstract class UserIdentity extends ActiveRecord implements IdentityInterface
 {
 	/**
