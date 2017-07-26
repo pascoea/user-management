@@ -434,8 +434,7 @@ class User extends UserIdentity
 
 		return parent::beforeDelete();
 	}
-	/*
-	 *  trying to move this outside of the vendor    
+
 	public function getCompany0()
     {
         return $this->hasOne(Company::className(), ['company_id' => 'company_id']);
@@ -456,7 +455,7 @@ class User extends UserIdentity
     {
     	return $this->hasOne(Customer::className(), ['customer_id' => 'customer_id']);
     }
-	 */
+
 	//Adam Pascoe - Get Company Name
 	/**
 	 * Get associated company information
